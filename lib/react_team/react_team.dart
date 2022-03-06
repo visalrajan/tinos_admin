@@ -126,7 +126,7 @@ class _ReactTeamState extends State<ReactTeam> {
                                                   .toList();
 
                                               return isPunchOut
-                                                  ? const Text("OUT",
+                                                  ? const Text("Punch Out",
                                                 style: TextStyle(
                                                   color: Colors.green,
                                                   fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ class _ReactTeamState extends State<ReactTeam> {
                                                         return const Text("Loading");
                                                       }
                                                       final data = snapshot.requireData;
-                                                      var punchTime ="OFF";
+                                                      var punchTime ="Leave";
 
                                                       dynamic punchDate;
                                                       data.docs.map((e) => {
@@ -158,11 +158,11 @@ class _ReactTeamState extends State<ReactTeam> {
                                                             if (punchDate ==
                                                                 "${date!.day.toString()}:${date!.month.toString()}:${date!.year.toString()}")
                                                               {
-                                                                punchTime = "IN",
+                                                                punchTime = "Punch In",
                                                               }
                                                             else
                                                               {
-                                                                punchTime = "OFF",
+                                                                punchTime = "Leave",
                                                               }
                                                           }
                                                       })

@@ -1,0 +1,281 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class AddMembers extends StatefulWidget {
+  String selectedDepartment = "";
+  AddMembers({required this.selectedDepartment});
+
+  @override
+  _AddMembersState createState() => _AddMembersState();
+}
+
+class _AddMembersState extends State<AddMembers> {
+  bool value = false;
+
+  final Stream<QuerySnapshot> user =
+  FirebaseFirestore.instance.collection("flutterDep").snapshots();
+  late List<bool> _teamSelected = [];
+  late List<Map<String, dynamic>> teamMembersList = [];
+  List selectedList = [];
+
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.selectedDepartment == "FLUTTER" ?
+    getFlutterTeam() : widget.selectedDepartment == "NODE" ?
+        getNodeTeam() : widget.selectedDepartment == "REACT" ?
+        getReactTeam() : getPythonTeam();
+
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: SingleChildScrollView(
+  //       child: Column(
+  //         children: [
+  //           Container(
+  //             height: MediaQuery.of(context).size.height,
+  //             padding: EdgeInsets.symmetric(vertical: 20),
+  //             child: StreamBuilder<QuerySnapshot>(
+  //               stream: user,
+  //                 builder: (BuildContext context,
+  //               AsyncSnapshot<QuerySnapshot> snapshot,
+  //                 ) {
+  //                 if (snapshot.hasError) {
+  //                   return Text("Something Wrong");
+  //                 }
+  //                 if(snapshot.connectionState == ConnectionState.waiting) {
+  //                   return Text("Loading");
+  //                 }
+  //                 final userData = snapshot.requireData;
+  //
+  //                 return ListView.builder(
+  //                   itemCount: userData.size,
+  //                     itemBuilder: (context, index) {
+  //                     final userDetails = snapshot.requireData;
+  //                     return Padding(
+  //                       padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
+  //                       child: Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Container(
+  //
+  //                             child: Padding(
+  //                               padding: const EdgeInsets.all(12.0),
+  //                               child: Row(
+  //                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                                 children: [
+  //                                   Text(
+  //                                     "${userData.docs[index]["name"]}",
+  //                                     style: TextStyle(
+  //                                       fontSize: 19,
+  //                                       fontWeight: FontWeight.bold,
+  //                                     ),
+  //                                   ),
+  //
+  //                                   Checkbox(
+  //                                       value: _teamSelected[index],
+  //                                       onChanged: (value) {
+  //                                         setState(() {
+  //                                           print("value = ${value}");
+  //                                           //this.value = value!;
+  //                                           _teamSelected[index] = value!;
+  //                                         });
+  //                                       },
+  //                                   ),
+  //
+  //
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             height: 50,
+  //                             width: double.infinity,
+  //                             decoration: BoxDecoration(
+  //                               borderRadius: BorderRadius.circular(15),
+  //                               border: Border.all(color: Colors.teal, width: 2),
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     );
+  //                     }
+  //                 );
+  //                 }
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+       child: Column(
+         children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              padding: EdgeInsets.symmetric(vertical: 50),
+                child: ListView.builder(
+                        itemCount: teamMembersList.length,
+                        itemBuilder: (context, index) {
+                          //final userDetails = snapshot.requireData;
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          //"${userData.docs[index]["name"]}",
+                                          "${teamMembersList[index]["name"]}",
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+
+                                        Checkbox(
+                                          value: _teamSelected[index],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              //print("value = ${value}");
+                                              _teamSelected[index] = value!;
+                                              if(value == true){
+                                                selectedList.add(teamMembersList[index]["name"]);
+                                              } else {
+                                                print(selectedList.indexOf(teamMembersList[index]["name"]));
+                                                int itemIndex = selectedList.indexOf(teamMembersList[index]["name"]);
+                                                selectedList.removeAt(itemIndex);
+                                              // if(selectedList.contains(flutterTeam[index]["name"]))  {
+                                              //     selectedList.remove(flutterTeam[index]["name"]);
+                                              //   }
+
+                                              }
+
+                                              print(selectedList);
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  height: 50,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.teal, width: 2),
+                                  ),
+                                ),
+
+                              ],
+
+                            ),
+                          );
+                        }
+                    )
+
+            ),
+
+           Padding(
+             padding: const EdgeInsets.only(left: 28, right: 28),
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               children: [
+                 SizedBox(
+                   height: 45,
+                   width: 130,
+                   child: ElevatedButton(
+                     onPressed: () {
+                       Navigator.pop(context, selectedList);
+                     },
+                     child: Text("OK"),
+                     style: ButtonStyle(
+                       backgroundColor: MaterialStateProperty.all(Colors.orange),
+                     ),
+                   ),
+                 ),
+
+                 SizedBox(
+                   height: 45,
+                   width: 130,
+                   child: ElevatedButton(
+                     onPressed: () {
+                       Navigator.pop(context);
+                     },
+                     child: Text("CANCEL"),
+                     style: ButtonStyle(
+                       backgroundColor: MaterialStateProperty.all(Colors.orange),
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+           ),
+         ],
+       ),
+      ),
+    );
+  }
+
+  Future getFlutterTeam() async {
+    var collection = FirebaseFirestore.instance.collection('flutterDep');
+    var querySnapshot = await collection.get();
+    for (var doc in querySnapshot.docs) {
+      Map<String, dynamic> data = doc.data();
+      setState(() {
+        teamMembersList.add(data);
+      });
+    }
+    _teamSelected = List<bool>.filled(teamMembersList.length, false, growable: true);
+  }
+
+  Future getReactTeam() async {
+    var collection = FirebaseFirestore.instance.collection('reactDep');
+    var querySnapshot = await collection.get();
+    for (var doc in querySnapshot.docs) {
+      Map<String, dynamic> data = doc.data();
+      setState(() {
+        teamMembersList.add(data);
+      });
+    }
+    _teamSelected = List<bool>.filled(teamMembersList.length, false, growable: true);
+  }
+
+  Future getNodeTeam() async {
+    var collection = FirebaseFirestore.instance.collection('nodeDep');
+    var querySnapshot = await collection.get();
+    for (var doc in querySnapshot.docs) {
+      Map<String, dynamic> data = doc.data();
+      setState(() {
+        teamMembersList.add(data);
+      });
+    }
+    _teamSelected = List<bool>.filled(teamMembersList.length, false, growable: true);
+  }
+
+  Future getPythonTeam() async {
+    var collection = FirebaseFirestore.instance.collection('pythonDep');
+    var querySnapshot = await collection.get();
+    for (var doc in querySnapshot.docs) {
+      Map<String, dynamic> data = doc.data();
+      setState(() {
+        teamMembersList.add(data);
+      });
+    }
+    _teamSelected = List<bool>.filled(teamMembersList.length, false, growable: true);
+  }
+}

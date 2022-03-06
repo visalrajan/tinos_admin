@@ -124,7 +124,7 @@ class _FlutterTeamState extends State<FlutterTeam> {
                                                   .toList();
 
                                               return isPunchOut
-                                                  ? const Text("OUT",
+                                                  ? const Text("Punch Out",
                                               style: TextStyle(
                                                 color: Colors.green,
                                                 fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ class _FlutterTeamState extends State<FlutterTeam> {
                                                                   return const Text("Loading");
                                                                 }
                                                                 final data = snapshot.requireData;
-                                                                var punchTime ="OFF";
+                                                                var punchTime ="Leave";
                                                                 dynamic punchDate;
                                                                 data.docs.map((e) => {
                                                                           if (userDetails.docs[index]["email"] == e["email"])
@@ -157,11 +157,11 @@ class _FlutterTeamState extends State<FlutterTeam> {
                                                                               if (punchDate ==
                                                                                   "${date!.day.toString()}:${date!.month.toString()}:${date!.year.toString()}")
                                                                                 {
-                                                                                  punchTime = "IN",
+                                                                                  punchTime = "Punch In",
                                                                                 }
                                                                               else
                                                                                 {
-                                                                                  punchTime = "OFF",
+                                                                                  punchTime = "Leave",
                                                                                 }
                                                                             }
                                                                         })
