@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tinos_admin/leave_details/leave_details.dart';
+import 'package:tinos_admin/leave_react_details_page/leave_react_details_page.dart';
 
-class LeaveFlutter extends StatefulWidget {
+class LeaveReact extends StatefulWidget {
 
 
   @override
-  _LeaveFlutterState createState() => _LeaveFlutterState();
+  _LeaveReactState createState() => _LeaveReactState();
 }
 
-class _LeaveFlutterState extends State<LeaveFlutter> {
+class _LeaveReactState extends State<LeaveReact> {
   // final FirebaseAuth auth = FirebaseAuth.instance;
   // final User? employee = auth.currentUser;
 
@@ -20,7 +20,7 @@ class _LeaveFlutterState extends State<LeaveFlutter> {
   var groupName = "FLUTTER";
 
   final Stream<QuerySnapshot> user =
-  FirebaseFirestore.instance.collection("flutterDep").snapshots();
+  FirebaseFirestore.instance.collection("reactDep").snapshots();
 
 
   final DateTime? date = DateTime.now();
@@ -87,12 +87,12 @@ class _LeaveFlutterState extends State<LeaveFlutter> {
                                               color: Colors.teal,
                                             ),
                                           ),
-                                           onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LeaveDetailsPage(
-                                            emailId: userEmail,
+                                          onTap: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LeaveReactDetailsPage(
+                                              emailId: userEmail,
 
-                                          )));
-                                        },
+                                            )));
+                                          },
                                         ),
                                       ),
                                       width: MediaQuery.of(context).size.width * 0.75,

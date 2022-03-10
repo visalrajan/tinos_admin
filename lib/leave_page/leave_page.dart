@@ -2,6 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tinos_admin/leave_flutter/leave_flutter.dart';
+import 'package:tinos_admin/leave_node/leave_node.dart';
+import 'package:tinos_admin/leave_python/leave_python.dart';
+import 'package:tinos_admin/leave_react/leave_react.dart';
 
 class LeavePage extends StatefulWidget {
   const LeavePage({Key? key}) : super(key: key);
@@ -68,7 +71,7 @@ class _LeavePageState extends State<LeavePage> {
 
                     Navigator.of(context).pop();
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LeaveFlutter()));
+                        builder: (context) => LeaveNode()));
 
                   },
                   child: const Text(
@@ -100,7 +103,7 @@ class _LeavePageState extends State<LeavePage> {
 
                     Navigator.of(context).pop();
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LeaveFlutter()));
+                        builder: (context) => LeavePython()));
 
                   },
                   child: const Text(
@@ -132,7 +135,7 @@ class _LeavePageState extends State<LeavePage> {
 
                     Navigator.of(context).pop();
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LeaveFlutter()));
+                        builder: (context) => LeaveReact()));
 
                   },
                   child: const Text(

@@ -55,7 +55,8 @@ class _TaskPageState extends State<TaskPage> {
   var buttonText = "Start Date";
   var buttonText1 = "End Date";
 
-  List addedMembers = [];
+  // List addedMembers = [];
+  List<Map<String, String>> addedMembers = [];
 
 
 
@@ -181,7 +182,7 @@ class _TaskPageState extends State<TaskPage> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: () async {
-                            List result = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddMembers(
+                            List<Map<String, String>> result = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddMembers(
                                 selectedDepartment: valueChoose1!)));
                             addedMembers = result;
                             print("result= ${addedMembers}");
@@ -314,14 +315,27 @@ class _TaskPageState extends State<TaskPage> {
                         ),
                       ),
 
-                      Container(
-                        height: 100,
-                        width: 150,
-                        child: ListView.builder(
-                            itemCount: addedMembers.length,
-                            itemBuilder: (context, index){
-                              return Text(addedMembers[index]);
-                            }
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
+                        child: Container(
+                          height: 100,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ListView.builder(
+                                itemCount: addedMembers.length,
+                                itemBuilder: (context, index){
+                                  return Text(addedMembers[index]["name"]!, style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),);
+                                }
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.green, width: 2),
+                          ),
                         ),
                       ),
 

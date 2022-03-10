@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class LeaveDetailsPage extends StatefulWidget {
+class LeaveNodeDetailsPage extends StatefulWidget {
 
   late String emailId = " ";
-  LeaveDetailsPage({required this.emailId});
+  LeaveNodeDetailsPage({required this.emailId});
 
 
   @override
-  _LeaveDetailsPageState createState() => _LeaveDetailsPageState();
+  _LeaveNodeDetailsPageState createState() => _LeaveNodeDetailsPageState();
 }
 
-class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
+class _LeaveNodeDetailsPageState extends State<LeaveNodeDetailsPage> {
 
   final Stream<QuerySnapshot> user =
   FirebaseFirestore.instance.collection("leave").snapshots();
