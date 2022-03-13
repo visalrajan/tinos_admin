@@ -5,7 +5,6 @@ import 'package:tinos_admin/node_team/node_team.dart';
 import 'package:tinos_admin/python_team/python_team.dart';
 import 'package:tinos_admin/react_team/react_team.dart';
 
-
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -15,9 +14,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register>
     with SingleTickerProviderStateMixin {
-
   late TabController _controller;
-
 
   @override
   void initState() {
@@ -29,7 +26,7 @@ class _RegisterState extends State<Register>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Register",
           style: TextStyle(
             fontSize: 24,
@@ -45,7 +42,7 @@ class _RegisterState extends State<Register>
           tabs: [
             Tab(
               child: Container(
-                child: Text(
+                child: const Text(
                   "FLUTTER",
                   style: TextStyle(
                     fontSize: 18,
@@ -56,7 +53,7 @@ class _RegisterState extends State<Register>
             ),
             Tab(
               child: Container(
-                child: Text(
+                child: const Text(
                   "NODE",
                   style: TextStyle(
                     fontSize: 18,
@@ -67,7 +64,7 @@ class _RegisterState extends State<Register>
             ),
             Tab(
               child: Container(
-                child: Text(
+                child: const Text(
                   "PYTHON",
                   style: TextStyle(
                     fontSize: 18,
@@ -78,8 +75,7 @@ class _RegisterState extends State<Register>
             ),
             Tab(
               child: Container(
-
-                child: Text(
+                child: const Text(
                   "REACT",
                   style: TextStyle(
                     fontSize: 18,
@@ -90,18 +86,16 @@ class _RegisterState extends State<Register>
             ),
           ],
         ),
-
       ),
       body: TabBarView(
         controller: _controller,
-        children: <Widget>[
+        children: const <Widget>[
           FlutterTeam(),
           NodeTeam(),
           PythonTeam(),
           ReactTeam(),
         ],
       ),
-
     );
   }
 }

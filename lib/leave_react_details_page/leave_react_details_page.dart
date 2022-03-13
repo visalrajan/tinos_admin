@@ -36,7 +36,7 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                 child: Container(
 
                   height: MediaQuery.of(context).size.height * 0.95,
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
                   child: StreamBuilder<QuerySnapshot>(
                       stream: user,
                       builder: (
@@ -44,10 +44,10 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                           AsyncSnapshot<QuerySnapshot> snapshot,
                           ) {
                         if(snapshot.hasError){
-                          return Text("Something wrong");
+                          return const Text("Something wrong");
                         }
                         if(snapshot.connectionState == ConnectionState.waiting) {
-                          return Text("Loading");
+                          return const Text("Loading");
                         }
                         final data = snapshot.requireData;
 
@@ -68,7 +68,7 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                                       child: Container(
                                         child: Center(
                                           child: Text("Date:   ${data.docs[index]["date"]}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
                                               color: Colors.black,
@@ -90,7 +90,7 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                                       child: Container(
                                         child: Center(
                                           child: Text("Type Of Day:   ${data.docs[index]["day-type"]}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
                                               color: Colors.black,
@@ -112,7 +112,7 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                                       child: Container(
                                         child: Center(
                                           child: Text("Type Of Leave:   ${data.docs[index]["leave-type"]}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
                                               color: Colors.black,
@@ -135,9 +135,9 @@ class _LeaveReactDetailsPageState extends State<LeaveReactDetailsPage> {
                                       child: Container(
                                         child: SingleChildScrollView(
                                           child: Padding(
-                                            padding: EdgeInsets.all(10),
+                                            padding: const EdgeInsets.all(10),
                                             child: Text("Reason:   ${data.docs[index]["reason"]}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
                                                 color: Colors.black,

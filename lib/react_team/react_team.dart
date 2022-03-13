@@ -19,14 +19,14 @@ class _ReactTeamState extends State<ReactTeam> {
   var groupName = "REACT";
 
   final Stream<QuerySnapshot> user =
-  FirebaseFirestore.instance.collection("reactDep").snapshots();
+      FirebaseFirestore.instance.collection("reactDep").snapshots();
 
   final Stream<QuerySnapshot> user1 =
-  FirebaseFirestore.instance.collection("punching").snapshots();
+      FirebaseFirestore.instance.collection("punching").snapshots();
   final DateTime? date = DateTime.now();
 
   final Stream<QuerySnapshot> user2 =
-  FirebaseFirestore.instance.collection("leaving").snapshots();
+      FirebaseFirestore.instance.collection("leaving").snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,9 @@ class _ReactTeamState extends State<ReactTeam> {
                 child: StreamBuilder<QuerySnapshot>(
                     stream: user,
                     builder: (
-                        BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot,
-                        ) {
+                      BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot,
+                    ) {
                       if (snapshot.hasError) {
                         return const Text("Something wrong");
                       }
@@ -68,7 +68,7 @@ class _ReactTeamState extends State<ReactTeam> {
                               Container(
                                 decoration: BoxDecoration(
                                   border:
-                                  Border.all(color: Colors.teal, width: 2),
+                                      Border.all(color: Colors.teal, width: 2),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Row(
@@ -86,24 +86,26 @@ class _ReactTeamState extends State<ReactTeam> {
                                           ),
                                         ),
                                       ),
-                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
                                     ),
 //--------------------------------------------------
                                     Container(
-
-                                      width: MediaQuery.of(context).size.width * 0.27,
-
+                                      width: MediaQuery.of(context).size.width *
+                                          0.27,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 30),
+                                        padding:
+                                            const EdgeInsets.only(left: 30),
                                         child: StreamBuilder<QuerySnapshot>(
                                             stream: user2,
                                             builder: (
-                                                BuildContext context,
-                                                AsyncSnapshot<QuerySnapshot>
-                                                snapshot,
-                                                ) {
+                                              BuildContext context,
+                                              AsyncSnapshot<QuerySnapshot>
+                                                  snapshot,
+                                            ) {
                                               if (snapshot.hasError) {
-                                                return const Text("Something wrong");
+                                                return const Text(
+                                                    "Something wrong");
                                               }
                                               if (snapshot.connectionState ==
                                                   ConnectionState.waiting) {
@@ -112,75 +114,111 @@ class _ReactTeamState extends State<ReactTeam> {
                                               final data = snapshot.requireData;
                                               var isPunchOut = false;
                                               dynamic punchOutDate;
-                                              data.docs.map((e) => {
-                                                if (userDetails.docs[index]["email"] == e["email"])
-                                                  {
-                                                    punchOutDate = e["punchOut-date"],
-                                                    if (punchOutDate ==
-                                                        "${date!.day.toString()}:${date!.month.toString()}:${date!.year.toString()}")
-                                                      {isPunchOut = true}
-                                                    else
-                                                      {isPunchOut = false}
-                                                  }
-                                              })
-                                                  .toList();
-
-                                              return isPunchOut
-                                                  ? const Text("Punch Out",
-                                                style: TextStyle(
-                                                  color: Colors.green,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                ),)
-                                                  : Container(
-                                                width: MediaQuery.of(context).size.width * 0.4,
-                                                child: StreamBuilder<QuerySnapshot>(
-                                                    stream: user1,
-                                                    builder: (
-                                                        BuildContext
-                                                        context,
-                                                        AsyncSnapshot<QuerySnapshot>snapshot,
-                                                        ) {
-                                                      if (snapshot.hasError) {
-                                                        return const Text("Something wrong");
-                                                      }
-                                                      if (snapshot.connectionState == ConnectionState.waiting) {
-                                                        return const Text("Loading");
-                                                      }
-                                                      final data = snapshot.requireData;
-                                                      var punchTime ="Leave";
-
-                                                      dynamic punchDate;
-                                                      data.docs.map((e) => {
-                                                        if (userDetails.docs[index]["email"] == e["email"])
+                                              data.docs
+                                                  .map((e) => {
+                                                        if (userDetails
+                                                                    .docs[index]
+                                                                ["email"] ==
+                                                            e["email"])
                                                           {
-                                                            punchDate = e["punch-date"],
-                                                            if (punchDate ==
+                                                            punchOutDate = e[
+                                                                "punchOut-date"],
+                                                            if (punchOutDate ==
                                                                 "${date!.day.toString()}:${date!.month.toString()}:${date!.year.toString()}")
                                                               {
-                                                                punchTime = "Punch In",
+                                                                isPunchOut =
+                                                                    true
                                                               }
                                                             else
                                                               {
-                                                                punchTime = "Leave",
+                                                                isPunchOut =
+                                                                    false
                                                               }
                                                           }
                                                       })
-                                                          .toList();
-                                                      return Text(punchTime,
-                                                        style: const TextStyle(
-                                                          color: Colors.green,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 18,
+                                                  .toList();
 
-                                                        ),
-                                                      );
-                                                    }),
+                                              return isPunchOut
+                                                  ? const Text(
+                                                      "Punch Out",
+                                                      style: TextStyle(
+                                                        color: Colors.green,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                      ),
+                                                    )
+                                                  : Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      child: StreamBuilder<
+                                                              QuerySnapshot>(
+                                                          stream: user1,
+                                                          builder: (
+                                                            BuildContext
+                                                                context,
+                                                            AsyncSnapshot<
+                                                                    QuerySnapshot>
+                                                                snapshot,
+                                                          ) {
+                                                            if (snapshot
+                                                                .hasError) {
+                                                              return const Text(
+                                                                  "Something wrong");
+                                                            }
+                                                            if (snapshot
+                                                                    .connectionState ==
+                                                                ConnectionState
+                                                                    .waiting) {
+                                                              return const Text(
+                                                                  "Loading");
+                                                            }
+                                                            final data = snapshot
+                                                                .requireData;
+                                                            var punchTime =
+                                                                "Leave";
 
-                                              );
+                                                            dynamic punchDate;
+                                                            data.docs
+                                                                .map((e) => {
+                                                                      if (userDetails.docs[index]
+                                                                              [
+                                                                              "email"] ==
+                                                                          e["email"])
+                                                                        {
+                                                                          punchDate =
+                                                                              e["punch-date"],
+                                                                          if (punchDate ==
+                                                                              "${date!.day.toString()}:${date!.month.toString()}:${date!.year.toString()}")
+                                                                            {
+                                                                              punchTime = "Punch In",
+                                                                            }
+                                                                          else
+                                                                            {
+                                                                              punchTime = "Leave",
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                .toList();
+                                                            return Text(
+                                                              punchTime,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .green,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 18,
+                                                              ),
+                                                            );
+                                                          }),
+                                                    );
                                             }),
                                       ),
-
                                     ),
                                   ],
                                 ),

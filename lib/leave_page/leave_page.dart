@@ -21,7 +21,7 @@ class _LeavePageState extends State<LeavePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
   //---------------------------------------------------------------
@@ -32,7 +32,7 @@ class _LeavePageState extends State<LeavePage> {
                 child: RawMaterialButton(
                   fillColor: Colors.teal,
                   elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -63,7 +63,7 @@ class _LeavePageState extends State<LeavePage> {
                 child: RawMaterialButton(
                   fillColor: Colors.teal,
                   elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -95,7 +95,7 @@ class _LeavePageState extends State<LeavePage> {
                 child: RawMaterialButton(
                   fillColor: Colors.teal,
                   elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -127,7 +127,7 @@ class _LeavePageState extends State<LeavePage> {
                 child: RawMaterialButton(
                   fillColor: Colors.teal,
                   elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
